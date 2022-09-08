@@ -26,7 +26,7 @@ import javax.validation.constraints.Size;
  * @author fvillavicencio
  */
 @Entity
-@Table(name = "plan_est")
+@Table(name = "plan_est" , schema="plancge")
 @NamedQueries({
     @NamedQuery(name = "PlanEst.findAll", query = "SELECT p FROM PlanEst p"),
     @NamedQuery(name = "PlanEst.findByEstId", query = "SELECT p FROM PlanEst p WHERE p.estId = :estId"),
