@@ -13,43 +13,38 @@
                 <h:outputText value="Ingresar informacion del plan de acción"/>
             </p:toolbarGroup>
             <p:toolbarGroup align="right">
-                <p:commandButton value="Nuevo" icon="pi pi-plus" process="@this" actionListener="#{planaccionBean.resetearFormulario()}"
-                                 update=":frmGen:panGriCar :frmGen:datTabCar" />
+                <p:commandButton value="Nuevo" icon="pi pi-plus" process="@this" 
+                                 update=":frmGen:panGriCar :frmGen:datTabCar" actionListener="#{tipofuncBean.resetearFormulario()}" />
                 <p:commandButton value="Guardar" icon="pi pi-save" process="@this :frmGen:panGriCar"
-                                  actionListener="#{planaccionBean.guardar}" update=":frmGen:menGen :frmGen:datTabCar :frmGen:panGriCar"/>
+                                 actionListener="#{tipofuncBean.guardar()}"   update=":frmGen:menGen :frmGen:datTabCar :frmGen:panGriCar"/>
                 <p:commandButton value="Editar" icon="pi pi-pencil" process="@this" 
-                                 update=":frmGen:panGriCar :frmGen:menGen"/>
+                                 update=":frmGen:panGriCar :frmGen:menGen" actionListener="#{tipofuncBean.editar()}"/>
                 <p:commandButton value="Eliminar" icon="pi pi-trash" onclick="PF('diaConEli').show();"/>
             </p:toolbarGroup>
         </p:toolbar>
         <br/>
         <p:panelGrid id="panGriCar" columns="4" style="width: 100%">
             <p:outputLabel for="txtCodPlan" value="Código"/>
-            <p:inputText id="txtCodPlan" value="#{planaccionBean.plan.planaccCod}" required="true" maxlength="100"/>
-            <p:outputLabel for="txaRecPlan" value="Recomendacion"/>
-            <p:inputTextarea id="txaRecPlan" value="#{planaccionBean.plan.planaccRecom}" maxlength="300" rows="4"/>
-            <p:outputLabel for="txaEstPlan" value="Estado"/>
-            <p:inputTextarea id="txaEstPlan" value="#{planaccionBean.plan.estId.estId}" maxlength="300" rows="4"/>
+            <p:inputText id="txtCodPlan" value="#{tipofuncBean.tipoinf.tipoinfId}" required="true" maxlength="100"/>
+            <p:outputLabel for="txaRecPlan" value="Descripcion"/>
+            <p:inputTextarea id="txaRecPlan" value="#{tipofuncBean.tipoinf.tipoinfDesc}" maxlength="300" rows="4"/>            
         </p:panelGrid>
         <br/>
-        <p:dataTable  id="datTabCar" value="#{planaccionBean.listaPlanes}" var="plan" selectionMode="single"
-                      rowKey="#{plan.planaccId}" paginator="true" rows="10">
-            <p:ajax event="rowSelect" listener="#{plan.planaccCod}"/>
+        <p:dataTable  id="datTabCar" value="#{tipofuncBean.listaTipofunc}" var="tipoinf" selectionMode="single"
+                      rowKey="#{tipoinf.tipoinfId}" paginator="true" rows="10">
+            <p:ajax event="rowSelect" listener="#{tipofuncBean.seleccionarFila}" />
             <p:column headerText="Código">
-                <h:outputText value="#{plan.planaccCod}"/>
+                <h:outputText value="#{tipoinf.tipoinfId}"/>
             </p:column>
-             <p:column headerText="Recomendación">
-                 <h:outputText value="#{plan.planaccRecom}"/>
-            </p:column>
-            <p:column headerText="Estado">
-                <h:outputText value="#{plan.estId.estId}"/>
-            </p:column>
+             <p:column headerText="Descripción">
+                 <h:outputText value="#{tipoinf.tipoinfDesc}"/>
+            </p:column>            
         </p:dataTable>
         
         <p:dialog widgetVar="diaConEli" header="Confirmación Eliminación" width="400px">
             <p:panelGrid id="panGriEli" columns="3" style="width: 100%">
                 <p:outputLabel value="Está seguro de eliminar el cargo?"/>
-                <p:commandButton value="Si"  process="@this"
+                <p:commandButton value="Si"  process="@this" actionListener="#{tipofuncBean.eliminar()}"
                                  update=":frmGen:menGen :frmGen:datTabCar :frmGen:panGriCar"
                                  oncomplete="PF('diaConEli').hide();"/>
                 <p:commandButton value="No" onclick="PF('diaConEli').hide();"/>

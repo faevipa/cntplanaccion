@@ -4,6 +4,7 @@
  */
 package com.cnt.cntplanaccion.beans;
 
+import com.matoosfe.unomina.beans.util.AbstractManagedBean;
 import com.cnt.planaccion.PlanCab;
 import com.cnt.planaccion.controllers.PlanCabFacade;
 import java.io.Serializable;
@@ -20,7 +21,7 @@ import javax.inject.Named;
  */
 @Named
 @ViewScoped
-public class PlanaccionBean implements Serializable{
+public class PlanaccionBean extends AbstractManagedBean implements Serializable{
     private PlanCab plan;
     private PlanCab planSel;
     private List<PlanCab> listaPlanes;
@@ -54,7 +55,25 @@ public class PlanaccionBean implements Serializable{
     }
 
     public void setListaPlanes(List<PlanCab> listaPlanes) {
-        this.listaPlanes = listaPlanes;
+        this.listaPlanes = listaPlanes;        
+    }
+    
+    public void guardar() {
+        try {
+            if (plan.getPlanaccCod() != null) {
+                //Actualizar
+                adminPlan.actualizar(plan);
+                anadirInfo("Cargo actualizado correctamente");
+            } else {
+                //Guardar
+                adminPlan.guardar(plan);
+                anadirInfo("Cargo guardado correctamente");
+            }
+            cargarPlanes();
+            resetearFormulario();
+        } catch (Exception e) {
+            anadirError("Error al procesar la operación:" + e.getMessage());
+        }
     }
     
     private void cargarPlanes() {
