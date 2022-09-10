@@ -5,7 +5,8 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:pe="http://primefaces.org/ui/extensions"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="/WEB-INF/templates/template.xhtml">
+                template="/WEB-INF/templates/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="contenido">
         <p:growl id="menGen"/>
         <p:toolbar>
@@ -28,8 +29,11 @@
             <p:inputText id="txtCodPlan" value="#{planaccionBean.plan.planaccCod}" required="true" maxlength="100"/>
             <p:outputLabel for="txaRecPlan" value="Recomendacion"/>
             <p:inputTextarea id="txaRecPlan" value="#{planaccionBean.plan.planaccRecom}" maxlength="300" rows="4"/>
-            <p:outputLabel for="txaEstPlan" value="Estado"/>
-            <p:inputTextarea id="txaEstPlan" value="#{planaccionBean.plan.estId.estId}" maxlength="300" rows="4"/>
+            <p:outputLabel for="selEstPlan" value="Estado"/>            
+            <p:selectOneMenu id="selEstPlan" value="#{planaccionBean.idEst}" required="true">                
+                <f:selectItem itemLabel="Seleccione una opción" itemValue="0" noSelectionOption="true"/>
+                <f:selectItems value="#{planaccionBean.listaEstados}"/>
+            </p:selectOneMenu>
         </p:panelGrid>
         <br/>
         <p:dataTable  id="datTabCar" value="#{planaccionBean.listaPlanes}" var="plan" selectionMode="single"
