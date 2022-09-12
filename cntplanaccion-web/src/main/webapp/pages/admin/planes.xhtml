@@ -17,8 +17,10 @@
                 <p:commandButton value="Nuevo" icon="pi pi-plus" process="@this" actionListener="#{planaccionBean.resetearFormulario()}"
                                  update=":frmGen:panGriCar :frmGen:datTabCar" />
                 <p:commandButton value="Guardar" icon="pi pi-save" process="@this :frmGen:panGriCar"
-                                  actionListener="#{planaccionBean.guardar}" update=":frmGen:menGen :frmGen:datTabCar :frmGen:panGriCar"/>
+                                  actionListener="#{planaccionBean.guardar}" 
+                                  update=":frmGen:menGen :frmGen:datTabCar :frmGen:panGriCar"/>
                 <p:commandButton value="Editar" icon="pi pi-pencil" process="@this" 
+                                 actionListener="#{planaccionBean.editar()}"
                                  update=":frmGen:panGriCar :frmGen:menGen"/>
                 <p:commandButton value="Eliminar" icon="pi pi-trash" onclick="PF('diaConEli').show();"/>
             </p:toolbarGroup>
@@ -51,7 +53,10 @@
         <br/>
         <p:dataTable  id="datTabCar" value="#{planaccionBean.listaPlanes}" var="plan" selectionMode="single"
                       rowKey="#{plan.planaccId}" paginator="true" rows="10">
-            <p:ajax event="rowSelect" listener="#{plan.planaccCod}"/>
+            <p:ajax event="rowSelect" listener="#{planaccionBean.seleccionarFila}"/>
+            <p:column headerText="Id">
+                <h:outputText value="#{plan.planaccId}"/>
+            </p:column>
             <p:column headerText="Código">
                 <h:outputText value="#{plan.planaccCod}"/>
             </p:column>

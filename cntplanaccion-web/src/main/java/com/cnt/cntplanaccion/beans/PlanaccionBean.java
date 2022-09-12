@@ -17,6 +17,7 @@ import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -101,6 +102,26 @@ public class PlanaccionBean extends AbstractManagedBean implements Serializable{
             resetearFormulario();
         } catch (Exception e) {
             anadirError("Error al procesar la operación:" + e.getMessage());
+        }
+    }
+    
+    /**
+     * Método para seleccionar un cargo
+     *
+     * @param ev
+     */
+    public void seleccionarFila(SelectEvent<PlanCab> ev) {
+        this.planSel = ev.getObject();
+    }
+    
+    public void editar() {
+        if (planSel != null) {
+            this.listaPlanes = new ArrayList<>();
+            this.plan = planSel;
+            this.idEst = plan.getEstId().getEstId();
+            cargarEstados();            
+        } else {
+            anadirError("Se debe seleccionar un plan");
         }
     }
     
