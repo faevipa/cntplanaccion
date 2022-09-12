@@ -115,8 +115,7 @@ public class PlanaccionBean extends AbstractManagedBean implements Serializable{
     }
     
     public void editar() {
-        if (planSel != null) {
-            this.listaPlanes = new ArrayList<>();
+        if (planSel != null) {            
             this.plan = planSel;
             this.idEst = plan.getEstId().getEstId();
             cargarEstados();            
@@ -126,6 +125,7 @@ public class PlanaccionBean extends AbstractManagedBean implements Serializable{
     }
     
     private void cargarEstados() {
+        this.listaEstados.clear();
         adminEstados.consultarTodos().forEach(est -> this.listaEstados
                 .add(new SelectItem(est.getEstId(), est.getEstDesc())));
     }
