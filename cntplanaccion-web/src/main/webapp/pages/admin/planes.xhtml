@@ -24,16 +24,29 @@
             </p:toolbarGroup>
         </p:toolbar>
         <br/>
-        <p:panelGrid id="panGriCar" columns="4" style="width: 100%">
-            <p:outputLabel for="txtCodPlan" value="Código"/>
-            <p:inputText id="txtCodPlan" value="#{planaccionBean.plan.planaccCod}" required="true" maxlength="100"/>
+        <p:panelGrid id="panGriCar" columns="4" style="width: 100%"> 
+            <p:outputLabel for="txaIdPlan" value="Id"/>
+            <p:inputTextarea id="txaIdPlan" value="#{planaccionBean.plan.planaccId}" maxlength="400" rows="3"/>
+            <p:outputLabel for="txaConclPlan" value="Conclusión"/>
+            <p:inputTextarea id="txaConclPlan" value="#{planaccionBean.plan.planaccConcl}" maxlength="400" rows="3"/>
             <p:outputLabel for="txaRecPlan" value="Recomendacion"/>
-            <p:inputTextarea id="txaRecPlan" value="#{planaccionBean.plan.planaccRecom}" maxlength="300" rows="4"/>
+            <p:inputTextarea id="txaRecPlan" value="#{planaccionBean.plan.planaccRecom}" maxlength="400" rows="3"/>
+            <p:outputLabel for="txtCodPlan" value="Código"/>
+            <p:inputText id="txtCodPlan" value="#{planaccionBean.plan.planaccCod}" required="true" maxlength="10"/>
+            <p:outputLabel for="txaRespPlan" value="Cedula Responsable"/>
+            <p:inputText id="txaRespPlan" value="#{planaccionBean.plan.planaccRespced}" maxlength="10"/>
+            <p:outputLabel for="txaCodOrgPlan" value="Código Organico"/>
+            <p:inputText id="txaCodOrgPlan" value="#{planaccionBean.plan.planccCodorg}" maxlength="10"/>
+            <p:outputLabel for="txaCasoPlan" value="Caso"/>
+            <p:inputText id="txaCasoPlan" value="#{planaccionBean.plan.planaccCaso}" maxlength="10"/>
             <p:outputLabel for="selEstPlan" value="Estado"/>            
             <p:selectOneMenu id="selEstPlan" value="#{planaccionBean.idEst}" required="true">                
                 <f:selectItem itemLabel="Seleccione una opción" itemValue="0" noSelectionOption="true"/>
                 <f:selectItems value="#{planaccionBean.listaEstados}"/>
             </p:selectOneMenu>
+            <p:outputLabel for="calFecSalEmp" value="Fecha de Inicio:"/>
+            <p:calendar id="calFecSalEmp" value="#{planaccionBean.plan.planaccFechini}" 
+                                navigator="true" pattern="yyyy-MM-dd"/>
         </p:panelGrid>
         <br/>
         <p:dataTable  id="datTabCar" value="#{planaccionBean.listaPlanes}" var="plan" selectionMode="single"

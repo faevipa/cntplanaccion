@@ -6,6 +6,7 @@ package com.cnt.cntplanaccion.beans;
 
 import com.matoosfe.unomina.beans.util.AbstractManagedBean;
 import com.cnt.planaccion.PlanCab;
+import com.cnt.planaccion.PlanEst;
 import com.cnt.planaccion.controllers.PlanCabFacade;
 import com.cnt.planaccion.controllers.PlanEstFacade;
 import java.io.Serializable;
@@ -85,6 +86,8 @@ public class PlanaccionBean extends AbstractManagedBean implements Serializable{
     
     public void guardar() {
         try {
+            PlanEst estTmp = new PlanEst(idEst);
+            this.plan.setEstId(estTmp);
             if (plan.getPlanaccCod() != null) {
                 //Actualizar
                 adminPlan.actualizar(plan);
