@@ -124,6 +124,19 @@ public class PlanaccionBean extends AbstractManagedBean implements Serializable{
         }
     }
     
+    public void eliminar() {
+        try {
+            if (planSel != null) {
+                adminPlan.eliminar(planSel);                
+                resetearFormulario();
+            } else {
+                anadirError("Se debe seleccionar un plan");
+            }
+        } catch (Exception e) {
+            anadirError("Error al eliminar:" + e.getMessage());
+        }
+    }
+    
     private void cargarEstados() {
         this.listaEstados.clear();
         adminEstados.consultarTodos().forEach(est -> this.listaEstados

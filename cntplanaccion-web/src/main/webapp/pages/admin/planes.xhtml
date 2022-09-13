@@ -71,7 +71,7 @@
         <p:dialog widgetVar="diaConEli" header="Confirmación Eliminación" width="400px">
             <p:panelGrid id="panGriEli" columns="3" style="width: 100%">
                 <p:outputLabel value="Está seguro de eliminar el cargo?"/>
-                <p:commandButton value="Si"  process="@this"
+                <p:commandButton value="Si"  process="@this" actionListener="#{planaccionBean.eliminar()}"
                                  update=":frmGen:menGen :frmGen:datTabCar :frmGen:panGriCar"
                                  oncomplete="PF('diaConEli').hide();"/>
                 <p:commandButton value="No" onclick="PF('diaConEli').hide();"/>
