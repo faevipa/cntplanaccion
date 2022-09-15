@@ -46,6 +46,12 @@
                 <f:selectItem itemLabel="Seleccione una opción" itemValue="0" noSelectionOption="true"/>
                 <f:selectItems value="#{planaccionBean.listaEstados}"/>
             </p:selectOneMenu>
+            <p:outputLabel for="selEstPlanConv" value="Tipo de Informe(Converter)"/>
+            <p:selectOneMenu id="selEstPlanConv" value="#{planaccionBean.plan.estId}" required="true"
+                             converter="#{convTipo}">                
+                <f:selectItem itemLabel="Seleccione una opción" itemValue="#{null}" noSelectionOption="true"/>
+                <f:selectItems value="#{tipofuncBean.listaTipofunc}" var="est" itemLabel="#{est.tipoinfDesc}" itemValue="#{est}"/>
+            </p:selectOneMenu>
             <p:outputLabel for="calFecSalEmp" value="Fecha de Inicio:"/>
             <p:calendar id="calFecSalEmp" value="#{planaccionBean.plan.planaccFechini}" 
                                 navigator="true" pattern="yyyy-MM-dd"/>
